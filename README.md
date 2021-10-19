@@ -33,7 +33,7 @@ The flow to develop a new feature is initing a new branch then creating a pull r
     git checkout -b {the branch name} 
     # if the branch was exist
     git checkout {the branch name} 
-    git pull origin main
+    git pull origin develop
     ```
 - Codeing a new feature
 - After the change is complete, let run the commands to commit code
