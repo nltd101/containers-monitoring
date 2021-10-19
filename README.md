@@ -26,7 +26,9 @@ yarn
 yarn start
 ```
 ## The flow
-The flow to develop a new feature is initing a new branch then creating a pull request on github
+The flow to develop a new feature is initing a new branch then creating a pull request on github.
+
+[To Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - Before changing the source code, let run the command to switch to the branch
     ```
     # if the branch wasn't exist
