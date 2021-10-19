@@ -42,3 +42,4 @@ The flow to develop a new feature is initing a new branch then creating a pull r
     git commit -m"the message"
     git push origin {the branch name}
     ```
+- Finally, you should create a pull request for the branch on the github
