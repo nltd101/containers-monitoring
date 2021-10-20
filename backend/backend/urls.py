@@ -1,4 +1,4 @@
-"""monitor URL Configuration
+"""backend URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.views import Container
+from apps.views import Container, ContainerMonitor
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/container', Container.as_view(), name="list-containers")
+    path('api/v1/container', Container.as_view(), name="list-containers"),
+    path('api/v1/container/<int:id>',
+         ContainerMonitor.as_view(), name="container-monitor")
 ]
