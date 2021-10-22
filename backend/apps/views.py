@@ -5,9 +5,19 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
+from apps.models import OrderModel, PackageModel
+from rest_framework.request import Request
 
 
-class Container(APIView):
+class OrderView(APIView):
+    def patch(self,  request: Request):
+
+        data = OrderModel.create(request.data)
+        print(data)
+        return Response({"data": data})
+
+
+class ContainerView(APIView):
     """
     A view that can accept POST requests with JSON content.
     """
@@ -32,16 +42,16 @@ class Container(APIView):
         return Response({'data': data})
 
 
-class ContainerMonitor(APIView):
+class ContainerMonitorView(APIView):
     """
     A view that can accept POST requests with JSON content.
     """
 
-    def patch(self, request, id, format=None):
-        response = {id: id}
-        response.update(request.data)
-        return Response(response)
+    def post(self, request: Request, id, format=None):
 
-    def post(self, request, format=None):
+        package = PackageModel.create(container_id=id, data=request.data)
 
-        return Response({'received data': request.data})
+        return Response({"data": package})
+
+    def get(self, request: Request, id, format=None):
+        return Response({"data":  PackageModel.get_package_by_order_id(id)})

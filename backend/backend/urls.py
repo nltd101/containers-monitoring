@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.views import Container, ContainerMonitor
+from apps.views import ContainerView, ContainerMonitorView, OrderView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/container', Container.as_view(), name="list-containers"),
+    path('api/v1/container', ContainerView.as_view(), name="list-containers"),
     path('api/v1/container/<int:id>',
-         ContainerMonitor.as_view(), name="container-monitor")
+         ContainerMonitorView.as_view(), name="container-monitor"),
+    path('api/v1/order/create',
+         OrderView.as_view(), name="container-monitor")
 ]
