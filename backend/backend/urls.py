@@ -19,7 +19,7 @@ from apps.views import ContainerView, ContainerMonitorView, OrderView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/container', ContainerView.as_view(), name="list-containers"),
-    path('api/v1/container/<int:id>',
+    path('api/v1/container/monitor',
          ContainerMonitorView.as_view(), name="container-monitor"),
     path('api/v1/order/create',
          OrderView.as_view(), name="container-monitor")

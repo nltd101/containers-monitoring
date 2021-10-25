@@ -47,11 +47,14 @@ class ContainerMonitorView(APIView):
     A view that can accept POST requests with JSON content.
     """
 
-    def post(self, request: Request, id, format=None):
-
+    def post(self, request: Request, format=None):
+        id = request.data.get("container_id")
         package = PackageModel.create(container_id=id, data=request.data)
 
         return Response({"data": package})
 
-    def get(self, request: Request, id, format=None):
-        return Response({"data":  PackageModel.get_package_by_order_id(id)})
+    def get(self, request: Request,  format=None):
+        id = request.query_params.get("container_id")
+        if not id:
+            raise(NotFound)
+        return Response({"data": PackageModel.get_package_by_order_id(id)})
