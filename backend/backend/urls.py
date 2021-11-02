@@ -21,6 +21,7 @@ urlpatterns = [
     path('api/v1/container', ContainerView.as_view(), name="list-containers"),
     path('api/v1/container/monitor',
          ContainerMonitorView.as_view(), name="container-monitor"),
-    path('api/v1/order/create',
-         OrderView.as_view(), name="container-monitor")
+    path('api/v1/order',
+         OrderView.as_view(), name="container-monitor"),
+
 ]
