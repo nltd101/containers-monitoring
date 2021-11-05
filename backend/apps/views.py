@@ -25,10 +25,10 @@ class OrderView(APIView):
             data = PackageModel.get_package_by_order_id(order_id)
             model: KMeanModel = KMeanModel.find_by_order_id(order_id)
             for e in data:
-                e.update({"is_abnormal": model.predict(e.get("data"))})
+                if model:
+                    e.update({"is_abnormal": model.predict(e.get("data"))})
                 e.update({"data": list_to_dict_factor(e.get("data"))})
-            if not model:
-                raise ValidationError("no such an model")
+
             return Response(
                 {"data": data})
         return Response({"data": OrderModel.get_all_order()})
