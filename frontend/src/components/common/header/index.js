@@ -19,8 +19,8 @@ const Header = (props) => {
       </div>
     </div>
     <div className="profile-container">
-      <p>Trung</p>
-      <img className="profile-avatar" src="https://scontent.fdad8-1.fna.fbcdn.net/v/t1.6435-9/120235410_1238559176485707_6637949935409294661_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=lImIJAvoF-kAX9zyJ2w&_nc_ht=scontent.fdad8-1.fna&oh=1d884ac166c6cdd067fc936e7030f209&oe=61A7BAB4" alt="avatar"/>
+      <p>David Le</p>
+      <img className="profile-avatar" src="https://scontent.fdad3-3.fna.fbcdn.net/v/t1.6435-9/33366469_525022044558964_5286142230615031808_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=730e14&_nc_ohc=BX2TF1Ml1YkAX-Aldnx&_nc_ht=scontent.fdad3-3.fna&oh=a29e775143bc6b5ff112097959524429&oe=61A978A8" alt="avatar"/>
     </div>
   </div>;
 };

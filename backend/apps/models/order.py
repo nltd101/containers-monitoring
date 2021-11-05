@@ -26,7 +26,7 @@ class OrderModel(models.Model):
     def get_by_id(cls, id):
         result = cls.objects.filter(pk=id)
         if not result:
-            raise ValidationError(detail="no such an order")
+            return None
         return result.values()[0]  # model_to_dict(result.first())
 
     @classmethod
@@ -58,8 +58,8 @@ class OrderModel(models.Model):
             container_data = model_to_dict(container_object)
             if order:
                 print(order)
-                container_data.update({"start_time": order.start_time})
-                container_data.update({"last_update": order.last_update})
+                container_data.update({"start_time": order.get('start_time')})
+                container_data.update({"last_update": order.get('last_update')})
                 container_data.update({"free": False})
                 busy_container.append(container_data)
 

@@ -102,7 +102,7 @@ const Container = () => {
   };
 
   return (
-    <>
+    <div className="main-content">
       <Header />
       <NewModal showNew={showNew} handleClose={handleClose} />
       <div className="container-main">
@@ -110,7 +110,7 @@ const Container = () => {
 
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default Container;

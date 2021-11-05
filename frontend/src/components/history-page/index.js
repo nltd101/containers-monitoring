@@ -83,7 +83,7 @@ import NewModal from "./newmodal";
 import axios from "axios";
 import Table from "../common/table";
 const labels= ["ID","Name","Customer's Name","Arrival day","Priority"]  
-const Container = () => {
+const History = () => {
   const [data, setData] = useState([]);
   const [showNew, setShowNew] = useState(false);
   console.log("render");
@@ -110,4 +110,4 @@ const Container = () => {
     </>
   );
 };
-export default Container;
+export default History;

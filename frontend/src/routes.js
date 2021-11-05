@@ -9,9 +9,6 @@ const AppRoutes = () => {
     <Switch>
       <Route path={paths.CONTAINER_PATH} component={ContainerPage} />
       <Route path={paths.FRONT_PAGE_PATH} component={ContainerPage} exact />
-      <Route path={'/history'} component={HistoryPage} exact />
-      <Route path={'/detail'} component={HistoryPage} exact />
-
     </Switch>
   );
 };
