@@ -49,6 +49,7 @@ class Monitor:
         from apps.models.container import ContainerModel
         from apps.models.order import OrderModel
         def on_message(client, userdata, msg):
+            print(msg.payload.decode())
             package_data = json.loads(msg.payload.decode())
             print(str(package_data.get("data_time")))
 
