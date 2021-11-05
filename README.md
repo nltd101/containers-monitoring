@@ -2,7 +2,7 @@
 
 ## Installation
 
-Backend requires [python3](https://www.python.org/) to run server.
+Backend requires [python3.8](https://www.python.org/) to run server.
 Frontend requires [nodejs](https://nodejs.org/) to run client.
 
 ### Backend

@@ -1,2 +1,32 @@
 .header {
+    display:flex;
+    height: 5rem;
+    align-items: center;
+}
+
+.title-icon-container {
+    flex-grow: 5;
+    display: flex;
+    justify-content: space-between;
+}
+.title-container {
+    font-weight: bold;
+    margin-left: 14px;
+}
+.icon-container {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+}
+.profile-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
+    border: 1px solid black;
 }
