@@ -50,7 +50,7 @@ class ContainerView(APIView):
         return OrderModel.create(data)
 
     def get(self, request, format=None):
-        containers = ContainerModel.get_sorted_container_list()
+        containers = OrderModel.get_sorted_container_list()
         return Response({'data': containers})
 
 
