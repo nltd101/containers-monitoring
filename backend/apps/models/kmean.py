@@ -6,26 +6,25 @@ from apps.models.order import OrderModel
 
 
 class KMeanModel(models.Model):
-    name = models.CharField(max_length=20)
-    order_id = models.IntegerField(null=True, blank=True)
-    co2_normal_center = models.FloatField(default=0)
+   
+    co2_normal_center = models.FloatField(null=True, blank=True, default=None)
     co2_normal_count = models.IntegerField(default=0)
-    co2_abnormal_center = models.FloatField(default=0)
+    co2_abnormal_center = models.FloatField(null=True, blank=True, default=None)
     co2_abnormal_count = models.IntegerField(default=0)
 
-    vibration_normal_center = models.FloatField(default=0)
+    vibration_normal_center = models.FloatField(null=True, blank=True, default=None)
     vibration_normal_count = models.IntegerField(default=0)
-    vibration_abnormal_center = models.FloatField(default=0)
+    vibration_abnormal_center = models.FloatField(null=True, blank=True, default=None)
     vibration_abnormal_count = models.IntegerField(default=0)
 
-    humidity_normal_center = models.FloatField(default=0)
+    humidity_normal_center = models.FloatField(null=True, blank=True, default=None)
     humidity_normal_count = models.IntegerField(default=0)
-    humidity_abnormal_center = models.FloatField(default=0)
+    humidity_abnormal_center = models.FloatField(null=True, blank=True, default=None)
     humidity_abnormal_count = models.IntegerField(default=0)
 
-    temperature_normal_center = models.FloatField(default=0)
+    temperature_normal_center = models.FloatField(null=True, blank=True, default=None)
     temperature_normal_count = models.IntegerField(default=0)
-    temperature_abnormal_center = models.FloatField(default=0)
+    temperature_abnormal_center = models.FloatField(null=True, blank=True, default=None)
     temperature_abnormal_count = models.IntegerField(default=0)
 
     def predict(self, list_data):
