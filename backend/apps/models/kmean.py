@@ -39,12 +39,12 @@ class KMeanModel(models.Model):
             return False
 
         return [predict_abnormal_facter(self.co2_normal_center, self.co2_abnormal_center, co2_value),
-                predict_abnormal_facter(self.vibration_normal_center, self.vibration_abnormal_center,
-                                        vibration_value),
+                predict_abnormal_facter(self.temperature_normal_center, self.temperature_abnormal_center,
+                                        temperature_value),
                 predict_abnormal_facter(self.humidity_normal_center, self.humidity_abnormal_center,
                                         humidity_value),
-                predict_abnormal_facter(self.temperature_normal_center, self.temperature_abnormal_center,
-                                        temperature_value)]
+                predict_abnormal_facter(self.vibration_normal_center, self.vibration_abnormal_center,
+                                        vibration_value)]
 
     @classmethod
     def find_by_container_id(cls, container_id):
