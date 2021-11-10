@@ -13,7 +13,7 @@ const NewModal = (props) => {
   return (
     <Modal show={showNew} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Tao chuyen di moi</Modal.Title>
+        <Modal.Title>New order</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

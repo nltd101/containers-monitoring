@@ -10,7 +10,7 @@ const Footer = (props) => {
 
   return (
     <div className="footer">
-      <div className="header">this is the footer</div>
+      <div className="header"></div>
     </div>
   );
 };
