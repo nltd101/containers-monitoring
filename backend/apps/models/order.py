@@ -41,9 +41,12 @@ class OrderModel(models.Model):
         containers = ContainerModel.objects.filter(pk=data.get("container"))
         if not containers:
             raise ValidationError(detail="so such a container")
+        
         category = data.get("category")
         data = cls.objects.create(name=name, route=route, description=description,
                                   start_time=start_time, category=category, container=containers.first())
+        containers.first().order_id = data.id
+        containers.first().save()
         return model_to_dict(data)
 
     @classmethod

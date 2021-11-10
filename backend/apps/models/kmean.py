@@ -7,24 +7,24 @@ from apps.models.order import OrderModel
 
 class KMeanModel(models.Model):
    
-    co2_normal_center = models.FloatField(null=True, blank=True, default=None)
+    co2_normal_center = models.FloatField(null=True,blank=True, default=-1)
     co2_normal_count = models.IntegerField(default=0)
-    co2_abnormal_center = models.FloatField(null=True, blank=True, default=None)
+    co2_abnormal_center = models.FloatField(null=True, blank=True, default=-1)
     co2_abnormal_count = models.IntegerField(default=0)
 
-    vibration_normal_center = models.FloatField(null=True, blank=True, default=None)
+    vibration_normal_center = models.FloatField(null=True, blank=True, default=-1)
     vibration_normal_count = models.IntegerField(default=0)
-    vibration_abnormal_center = models.FloatField(null=True, blank=True, default=None)
+    vibration_abnormal_center = models.FloatField(null=True, blank=True, default=-1)
     vibration_abnormal_count = models.IntegerField(default=0)
 
-    humidity_normal_center = models.FloatField(null=True, blank=True, default=None)
+    humidity_normal_center = models.FloatField(null=True, blank=True, default=-1)
     humidity_normal_count = models.IntegerField(default=0)
-    humidity_abnormal_center = models.FloatField(null=True, blank=True, default=None)
+    humidity_abnormal_center = models.FloatField(null=True, blank=True, default=-1)
     humidity_abnormal_count = models.IntegerField(default=0)
 
-    temperature_normal_center = models.FloatField(null=True, blank=True, default=None)
+    temperature_normal_center = models.FloatField(null=True, blank=True, default=-1)
     temperature_normal_count = models.IntegerField(default=0)
-    temperature_abnormal_center = models.FloatField(null=True, blank=True, default=None)
+    temperature_abnormal_center = models.FloatField(null=True, blank=True, default=-1)
     temperature_abnormal_count = models.IntegerField(default=0)
 
     def predict(self, list_data):
@@ -75,17 +75,17 @@ class KMeanModel(models.Model):
         return model
 
     def train(self, list_data):
-        def train_factor(normal_center, normal_count, abnormal_center, abnormal_count, value) -> [float]:
+        def train_factor(normal_center, normal_count, abnormal_center, abnormal_count, value) :
             def __move(center, value, count):
                 count += 1
                 center += (value - center) / count
                 return center, count
 
-            if not normal_center:
+            if  normal_center==-1 :
                 normal_center, normal_count = __move(value, value, normal_count)
                 return normal_center, normal_count, abnormal_center, abnormal_count
                 pass
-            if not abnormal_center:
+            if  abnormal_center == -1 :
                 abnormal_center, abnormal_count = __move(value, value, abnormal_count)
                 return normal_center, normal_count, abnormal_center, abnormal_count
                 pass
