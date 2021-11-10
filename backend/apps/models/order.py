@@ -10,6 +10,7 @@ from django.db import models
 from apps.models.container import ContainerModel
 
 
+
 class OrderModel(models.Model):
     name = models.CharField(max_length=100)
     route = models.CharField(max_length=300)
@@ -21,6 +22,8 @@ class OrderModel(models.Model):
 
     def __str__(self) -> str:
         return str(self.pk)
+
+
 
     @classmethod
     def get_by_id(cls, id):
@@ -35,11 +38,13 @@ class OrderModel(models.Model):
         route = data.get("route")
         description = data.get("description")
         start_time = data.get("start_time")
-        container = ContainerModel.objects.get(pk=data.get("container"))
+        containers = ContainerModel.objects.filter(pk=data.get("container"))
+        if not containers:
+            raise ValidationError(detail="so such a container")
         category = data.get("category")
-        data = cls.objects.create(name=name, route=route, desciption=description,
-                                  start_time=start_time, category=category, container=container)
-        return data.values()  # model_to_dict(data)
+        data = cls.objects.create(name=name, route=route, description=description,
+                                  start_time=start_time, category=category, container=containers.first())
+        return model_to_dict(data)
 
     @classmethod
     def get_all_order(cls, page=0, step=10):
