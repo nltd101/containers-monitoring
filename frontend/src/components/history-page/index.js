@@ -81,13 +81,13 @@ import ContainerRow from "../common/container-row";
 // export default Login;
 import axios from "axios";
 import Table from "../common/table";
-const labels= ["ID","Name","Custumer's Name","Arrival day","Priority"]  
+const labels = ["ID", "Name", "Custumer's Name", "Arrival day", "Priority"];
 const Container = () => {
   const [data, setData] = useState([]);
   const [showNew, setShowNew] = useState(false);
   console.log("render");
   useEffect(() => {
-    axios 
+    axios
       .get("/api/v1/order")
       .then((res) => {
         return res.data;
@@ -101,10 +101,12 @@ const Container = () => {
   };
 
   return (
-    <div className="main-content">
+    <div className="main-content content">
       <Header label={"History"} />
       <div className="container-main">
-      <Table page={"history"} setShowNew={setShowNew} labels={labels}>{data}</Table>
+        <Table page={"history"} setShowNew={setShowNew} labels={labels}>
+          {data}
+        </Table>
       </div>
       <Footer />
     </div>

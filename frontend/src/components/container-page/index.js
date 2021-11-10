@@ -82,13 +82,13 @@ import NewModal from "./newmodal";
 // export default Login;
 import axios from "axios";
 import Table from "../common/table";
-const labels= ["#","Name","Start time","Last update","Action"]  
+const labels = ["#", "Name", "Start time", "Last update", "Action"];
 const Container = () => {
   const [data, setData] = useState([]);
   const [showNew, setShowNew] = useState(false);
   console.log("render");
   useEffect(() => {
-    axios 
+    axios
       .get("/api/v1/container")
       .then((res) => {
         return res.data;
@@ -102,12 +102,13 @@ const Container = () => {
   };
 
   return (
-    <div className="main-content">
-      <Header label={"Ticket"}/>
+    <div className="main-content content">
+      <Header label={"Ticket"} />
       <NewModal showNew={showNew} handleClose={handleClose} />
       <div className="container-main">
-      <Table page={"container"} setShowNew={setShowNew} labels={labels}>{data}</Table>
-
+        <Table page={"container"} setShowNew={setShowNew} labels={labels}>
+          {data}
+        </Table>
       </div>
       <Footer />
     </div>

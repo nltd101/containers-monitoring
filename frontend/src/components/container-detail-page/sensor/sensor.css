@@ -1,0 +1,25 @@
+.sensor-container{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    padding:3px 10px;
+    margin: 3px;
+    border-radius: 10px;
+}
+.sensor-container div{
+    flex: 1;
+}
+.sensor-container div p{
+    margin:0;
+    padding:0;
+    font-weight: 400;
+}
+.chosen div{
+    color: white;
+    background-color: rgb(68, 37, 155);
+}
+.area-container{
+   
+    display: grid;
+  grid-template-columns: auto auto;
+}
