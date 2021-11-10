@@ -103,10 +103,10 @@ const Container = () => {
 
   return (
     <div className="main-content">
-      <Header />
+      <Header label={"Ticket"}/>
       <NewModal showNew={showNew} handleClose={handleClose} />
       <div className="container-main">
-      <Table setShowNew={setShowNew} labels={labels}>{data}</Table>
+      <Table page={"container"} setShowNew={setShowNew} labels={labels}>{data}</Table>
 
       </div>
       <Footer />

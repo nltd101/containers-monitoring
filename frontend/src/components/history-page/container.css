@@ -17,3 +17,11 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.container-main {
+  width: "fit-content";
+  margin: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 280px;
+}
