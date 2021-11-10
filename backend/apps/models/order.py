@@ -51,7 +51,7 @@ class OrderModel(models.Model):
         data_object = cls.objects.all().order_by("-start_time")[page * step:(page + 1) * step]
         print(data_object)
 
-        return [model_to_dict(object) for object in data_object]
+        return data_object.values()
 
     @classmethod
     def get_sorted_container_list(cls):

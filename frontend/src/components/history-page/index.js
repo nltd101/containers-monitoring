@@ -13,7 +13,6 @@ import "./container.css";
 import { FRONT_PAGE_PATH } from "../../constants/paths";
 import Button from "react-bootstrap/Button";
 import ContainerRow from "../common/container-row";
-import NewModal from "./newmodal";
 // const Login = ({
 //   isLoggedIn,
 //   isLoginFailed,
@@ -82,14 +81,14 @@ import NewModal from "./newmodal";
 // export default Login;
 import axios from "axios";
 import Table from "../common/table";
-const labels= ["ID","Name","Customer's Name","Arrival day","Priority"]  
-const History = () => {
+const labels= ["ID","Name","Custumer's Name","Arrival day","Priority"]  
+const Container = () => {
   const [data, setData] = useState([]);
   const [showNew, setShowNew] = useState(false);
   console.log("render");
   useEffect(() => {
-    axios
-      .get("/api/v1/container")
+    axios 
+      .get("/api/v1/order")
       .then((res) => {
         return res.data;
       })
@@ -102,12 +101,13 @@ const History = () => {
   };
 
   return (
-    <>
-      <Header />
-      <NewModal showNew={showNew} handleClose={handleClose} />
-      <Table setShowNew={setShowNew} labels={labels}>{data}</Table>
-      {/* <Footer /> */}
-    </>
+    <div className="main-content">
+      <Header label={"History"} />
+      <div className="container-main">
+      <Table page={"history"} setShowNew={setShowNew} labels={labels}>{data}</Table>
+      </div>
+      <Footer />
+    </div>
   );
 };
-export default History;
+export default Container;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ContainerRow from "../container-row";
-
+import HistoryRow from "../history-row";
 // import Input from "components/common/inputs/input";
 // import Button from "components/common/buttons/button";
 
@@ -19,7 +19,8 @@ const Table = (props) => {
             {props.labels.map((e) => <th>{e}</th>)} 
         </tr>
          {data.map((e) => (
-          <ContainerRow container={e} setShowNew={ props.setShowNew} />
+           props.page=="container"?<ContainerRow container={e} setShowNew={ props.setShowNew} />:
+           <HistoryRow container={e} setShowNew={ props.setShowNew} />
         ))} 
       </table>
     </>
