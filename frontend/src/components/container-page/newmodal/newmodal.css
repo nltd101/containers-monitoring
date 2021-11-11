@@ -1,0 +1,12 @@
+.id-cate-container {
+    display: flex;
+    justify-content: space-between;
+}
+.cate {
+    width: 206.8px;
+
+}
+.route-time-container {
+    display: flex;
+    justify-content: space-between;
+}
