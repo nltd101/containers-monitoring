@@ -1,0 +1,33 @@
+.sensor-container{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    padding:3px 10px;
+    margin: 3px;
+    border-radius: 10px;
+}
+.factor-container div{
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    padding:10px;
+    margin: 3px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.chosen-factor div{
+    color: white;
+    background-color: rgb(68, 37, 155) !important;
+}
+.chosen-factor{
+    background-color: rgb(68, 37, 155) !important;
+}
+.factor-container{
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+.value{
+    font-size: 34px;
+}

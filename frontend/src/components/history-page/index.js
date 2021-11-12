@@ -13,7 +13,6 @@ import "./container.css";
 import { FRONT_PAGE_PATH } from "../../constants/paths";
 import Button from "react-bootstrap/Button";
 import ContainerRow from "../common/container-row";
-import NewModal from "./newmodal";
 // const Login = ({
 //   isLoggedIn,
 //   isLoginFailed,
@@ -82,15 +81,14 @@ import NewModal from "./newmodal";
 // export default Login;
 import axios from "axios";
 import Table from "../common/table";
-const labels = ["#", "Name", "Start time", "Last update", "Action"];
+const labels = ["ID", "Name", "Custumer's Name", "Arrival day", "Priority"];
 const Container = () => {
   const [data, setData] = useState([]);
   const [showNew, setShowNew] = useState(false);
-
   console.log("render");
   useEffect(() => {
     axios
-      .get("/api/v1/container")
+      .get("/api/v1/order")
       .then((res) => {
         return res.data;
       })
@@ -104,10 +102,9 @@ const Container = () => {
 
   return (
     <div className="main-content content">
-      <Header label={"Ticket"} />
-      <NewModal showNew={showNew} handleClose={handleClose} />
+      <Header label={"History"} />
       <div className="container-main">
-        <Table page={"container"} setShowNew={setShowNew} labels={labels}>
+        <Table page={"history"} setShowNew={setShowNew} labels={labels}>
           {data}
         </Table>
       </div>

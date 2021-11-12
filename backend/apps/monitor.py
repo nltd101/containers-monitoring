@@ -7,7 +7,8 @@ from apps.utils import dict_to_list_factor
 
 broker = '075f7b803efc48c687b90c647a81607e.s1.eu.hivemq.cloud'
 port = 8883
-topic = "container/temp"
+topic = "container/value"
+topic_order_id = "container/magd"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 username = 'minh123'
@@ -68,3 +69,17 @@ class Monitor:
     def listen_factor(self):
         self.__subscribe()
         self.client.loop_start()
+    def send_order_id_to_node_red(self,order_id,container_id):
+        json_data = {
+            "container_id": container_id,
+            "magd": order_id,
+        }
+        print(json_data)
+        msg = json.dumps(json_data)
+        result = self.client.publish(topic_order_id, msg)
+         
+        status = result[0]
+        if status == 0:
+            print(f"Send `{msg}` to topic `{topic_order_id}`")
+        else:
+            print(f"Failed to send message to topic {topic_order_id}")

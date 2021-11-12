@@ -1,7 +1,8 @@
-import Modal from "react-bootstrap/Modal";
+import {Modal, Form, Button} from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+
+import "./newmodal.css";
+
 const NewModal = (props) => {
   let showNew = props.showNew,
     handleClose = props.handleClose;
@@ -10,56 +11,80 @@ const NewModal = (props) => {
     console.log("click", formData);
   };
   const [formData, setFormData] = useState({ email: null, password: null });
+  console.log("chua mount")
+
   return (
     <Modal show={showNew} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Tao chuyen di moi</Modal.Title>
+        <Modal.Title>New order</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Name </Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Enter email"
-              onChange={(e) => {
-                setFormData({
-                  email: e.target.value,
-                  password: formData.password,
-                });
-              }}
-              value={formData.email}
+              type="text"
+              placeholder="Enter your name"
             />
-            {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
+          </Form.Group>
+          <div className="id-cate-container">
+            <div>
+            <Form.Group>
+              <Form.Label>ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder=""
+              />
+            </Form.Group>
+            </div>
+            <div className="cate">
+            <Form.Group>
+              <Form.Label>Category</Form.Label>
+              <Form.Select defaultChecked={null}>
+                <option>Apple</option>
+                <option>Orange</option>
+                <option>Fish</option>
+                <option>Beef</option>
+              </Form.Select>
+            </Form.Group>
+            </div>
+          </div>
+
+         <div className="route-time-container">
+         <Form.Group>
+          <Form.Label>Route</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder=""
+            />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+          <Form.Group>
+          <Form.Label>Time Start</Form.Label>
             <Form.Control
-              type="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={(e) => {
-                setFormData({
-                  password: e.target.value,
-                  email: formData.email,
-                });
-              }}
+              type="text"
+              placeholder=""
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
+        </div>
+
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder=""
+                row={3}
+              />
           </Form.Group>
+
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Close
+          Cancel
         </Button>
-        <Button variant="primary" type="submit" onClick={createNew}>
-          Submit
+        <Button variant="primary" onClick={createNew}>
+           Start 
         </Button>
       </Modal.Footer>
     </Modal>

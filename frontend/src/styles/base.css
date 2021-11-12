@@ -1,3 +1,12 @@
 body {
   margin: 0;
+
+}
+.screen{
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(228, 228, 228);
+}
+.content{
+ flex: 1;
 }

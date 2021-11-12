@@ -29,7 +29,7 @@ class OrderModel(models.Model):
     def get_by_id(cls, id):
         result = cls.objects.filter(pk=id)
         if not result:
-            raise ValidationError(detail="no such an order")
+            return None
         return result.values()[0]  # model_to_dict(result.first())
 
     @classmethod
@@ -41,9 +41,12 @@ class OrderModel(models.Model):
         containers = ContainerModel.objects.filter(pk=data.get("container"))
         if not containers:
             raise ValidationError(detail="so such a container")
+        
         category = data.get("category")
         data = cls.objects.create(name=name, route=route, description=description,
                                   start_time=start_time, category=category, container=containers.first())
+        containers.first().order_id = data.id
+        containers.first().save()
         return model_to_dict(data)
 
     @classmethod
@@ -51,7 +54,7 @@ class OrderModel(models.Model):
         data_object = cls.objects.all().order_by("-start_time")[page * step:(page + 1) * step]
         print(data_object)
 
-        return [model_to_dict(object) for object in data_object]
+        return data_object.values()
 
     @classmethod
     def get_sorted_container_list(cls):
@@ -63,8 +66,8 @@ class OrderModel(models.Model):
             container_data = model_to_dict(container_object)
             if order:
                 print(order)
-                container_data.update({"start_time": order.start_time})
-                container_data.update({"last_update": order.last_update})
+                container_data.update({"start_time": order.get('start_time')})
+                container_data.update({"last_update": order.get('last_update')})
                 container_data.update({"free": False})
                 busy_container.append(container_data)
 

@@ -1,0 +1,28 @@
+.graph-container{
+
+    width: 100%;
+    background-color: white;
+    border-radius: 15;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 300;
+    height: 500px;
+    padding: 10px;
+}
+.graph{
+   
+    height: 500;
+    flex:1 !important}
+.graph-statistic{
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+}
+.statistic-tag{
+    padding-top: 30px;
+    background-color: rgb(255, 255, 255);
+  
+    border-bottom: 1px solid rgb(114, 114, 114);
+    text-align: center;
+    flex: 1;
+}

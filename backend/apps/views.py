@@ -47,10 +47,15 @@ class ContainerView(APIView):
         #   "start_time"
         #   "container"
         #   "category"
-        return OrderModel.create(data)
+        data = OrderModel.create(data)
+        if not data:
+            raise ValidationError(detail="create package fail")
+        monitor.send_order_id_to_node_red(data.get("id"),data.get("container"))
+        return Response({'data': data})
+
 
     def get(self, request, format=None):
-        containers = ContainerModel.get_sorted_container_list()
+        containers = OrderModel.get_sorted_container_list()
         return Response({'data': containers})
 
 

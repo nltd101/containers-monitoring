@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import * as paths from "./constants/paths";
 import ContainerPage from "./components/container-page";
-
+import HistoryPage from "./components/history-page"
 const AppRoutes = () => {
   return (
     <Switch>

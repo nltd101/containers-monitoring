@@ -7,7 +7,6 @@ from django.db.models.expressions import F
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 from django.db import models
-
 from apps.utils import dict_to_list_factor
 
 
@@ -21,8 +20,6 @@ class ContainerModel(models.Model):
         if not containers:
             return None
         return containers.first()
-
-
 
     def __str__(self) -> str:
         return str(self.pk) + "_" + str(self.name)
