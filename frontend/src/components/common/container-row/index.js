@@ -7,8 +7,8 @@ const ContainerRow = (props) => {
   const history = useHistory();
 
   const handleDetailClick = () => {
-    history.push('/detail')
-  }
+    history.push("/order/" + container.order_id);
+  };
 
   return (
     <tr>
@@ -18,11 +18,16 @@ const ContainerRow = (props) => {
       <td>{container.last_update}</td>
       <td>
         {container.free ? (
-          <Button variant="success" onClick={() => props.setShowNew(true)}>
+          <Button
+            variant="success"
+            onClick={() => props.setShowNew(container.id)}
+          >
             New
           </Button>
         ) : (
-          <Button variant="warning" onClick={handleDetailClick}>Detail</Button>
+          <Button variant="warning" onClick={handleDetailClick}>
+            Detail
+          </Button>
         )}
       </td>
     </tr>

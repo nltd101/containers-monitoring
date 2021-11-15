@@ -17,7 +17,7 @@ def dict_to_list_factor(dict_data: dict):
 
 def list_to_dict_factor(list_data: list):
     co2 = {"max": list_data[0][0], "min": list_data[0][1], "mean": list_data[0][2], "variance": list_data[0][3]}
-    temperature = {"max": list_data[1][0], "min": list_data[1][1], "mean": list_data[1][2], "variance": list_data[1][3]}
-    humidity = {"max": list_data[2][0], "min": list_data[2][1], "mean": list_data[2][2], "variance": list_data[2][3]}
+    humidity   = {"max": list_data[1][0], "min": list_data[1][1], "mean": list_data[1][2], "variance": list_data[1][3]}
+    temperature = {"max": list_data[2][0], "min": list_data[2][1], "mean": list_data[2][2], "variance": list_data[2][3]}
     vibration = {"max": list_data[3][0], "min": list_data[3][1], "mean": list_data[3][2], "variance": list_data[3][3]}
     return {"co2": co2, "temperature": temperature, "humidity": humidity, "vibration": vibration}

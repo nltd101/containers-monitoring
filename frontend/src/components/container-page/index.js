@@ -101,11 +101,13 @@ const Container = () => {
   const handleClose = () => {
     setShowNew(false);
   };
-
+  useEffect(() => {
+    console.log("id", showNew);
+  }, [showNew]);
   return (
     <div className="main-content content">
       <Header label={"Ticket"} />
-      <NewModal showNew={showNew} handleClose={handleClose} />
+      <NewModal setData={setData} showNew={showNew} handleClose={handleClose} />
       <div className="container-main">
         <Table page={"container"} setShowNew={setShowNew} labels={labels}>
           {data}
