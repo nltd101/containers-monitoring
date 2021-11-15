@@ -37,17 +37,21 @@ class OrderModel(models.Model):
         name = data.get("name")
         route = data.get("route")
         description = data.get("description")
-        start_time = data.get("start_time")
-        containers = ContainerModel.objects.filter(pk=data.get("container"))
+        start_time = data.get("time_start")
+        containers:QuerySet[ContainerModel] = ContainerModel.objects.filter(pk=data.get("container"))
         if not containers:
             raise ValidationError(detail="so such a container")
         
         category = data.get("category")
-        data = cls.objects.create(name=name, route=route, description=description,
-                                  start_time=start_time, category=category, container=containers.first())
-        containers.first().order_id = data.id
-        containers.first().save()
-        return model_to_dict(data)
+        container =containers.first()
+        data:OrderModel = cls.objects.create(name=name, route=route, description=description,
+                                  start_time=start_time, category=category, container=container)
+        print(data)
+        container.order_id = data.id
+        container.save()
+        result= model_to_dict(data)
+        result.update({"start_time":data.start_time,"last_update":data.last_update})
+        return result
 
     @classmethod
     def get_all_order(cls, page=0, step=10):
@@ -77,5 +81,6 @@ class OrderModel(models.Model):
                 container_data.update({"free": True})
                 free_container.append(container_data)
         busy_container.sort(key=lambda x: x["start_time"])
+        busy_container.reverse()
         busy_container.extend(free_container)
         return busy_container

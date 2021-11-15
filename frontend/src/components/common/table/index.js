@@ -19,9 +19,13 @@ const Table = (props) => {
         </tr>
         {data.map((e) =>
           props.page == "container" ? (
-            <ContainerRow container={e} setShowNew={props.setShowNew} />
+            <ContainerRow
+              key={e.id}
+              container={e}
+              setShowNew={props.setShowNew}
+            />
           ) : (
-            <HistoryRow container={e} />
+            <HistoryRow container={e} key={e.id} />
           )
         )}
       </table>

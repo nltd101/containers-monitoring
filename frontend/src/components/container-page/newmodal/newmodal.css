@@ -7,6 +7,13 @@
 
 }
 .route-time-container {
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
+}
+.route-container{
+    /* flex:1; */
+}
+.time-container{
+    width: 206.8px;
 }
