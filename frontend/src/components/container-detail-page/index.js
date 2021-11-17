@@ -112,8 +112,9 @@ const ContainerDetail = (props) => {
       });
   }, []);
   console.log(props.match.params.id);
+
   function getDataFormat(factor) {
-    let step = Math.floor(data.length / 100);
+    let step = Math.floor(data.length / 20);
     let meanArray = [];
     for (let i = 0; i < data.length; i += step) {
       let sum = 0;

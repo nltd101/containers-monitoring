@@ -7,6 +7,8 @@ import Navbar from "./components/Navigation bar/Navbar";
 import History from "./components/history-page";
 import Container from "./components/container-page";
 import ContainerDetail from "./components/container-detail-page";
+import Support from "./components/support-page";
+import Warning from "./components/login-page";
 const App = () => {
   return (
     <Router>
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/containers" exact component={Container} />
           <Route path="/historys" exact component={History} />
           <Route path="/order/:id" exact component={ContainerDetail} />
+          <Route path="/support" exact component={Support} />
+          <Route path="/warning" exact component={Warning} />
         </Switch>
       </div>
     </Router>
