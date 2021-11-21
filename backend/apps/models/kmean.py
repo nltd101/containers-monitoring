@@ -6,7 +6,7 @@ from apps.models.order import OrderModel
 
 
 class KMeanModel(models.Model):
-   
+
     co2_normal_center = models.FloatField(null=True,blank=True, default=-1)
     co2_normal_count = models.IntegerField(default=0)
     co2_abnormal_center = models.FloatField(null=True, blank=True, default=-1)
@@ -38,13 +38,13 @@ class KMeanModel(models.Model):
                 return True
             return False
 
-        return [predict_abnormal_facter(self.co2_normal_center, self.co2_abnormal_center, co2_value),
-                predict_abnormal_facter(self.temperature_normal_center, self.temperature_abnormal_center,
-                                        temperature_value),
-                predict_abnormal_facter(self.humidity_normal_center, self.humidity_abnormal_center,
+        return {"co2":predict_abnormal_facter(self.co2_normal_center, self.co2_abnormal_center, co2_value),
+            "temperature"  :  predict_abnormal_facter(self.temperature_normal_center, self.temperature_abnormal_center,
+                                      temperature_value),
+                  "humidity":predict_abnormal_facter(self.humidity_normal_center, self.humidity_abnormal_center,
                                         humidity_value),
-                predict_abnormal_facter(self.vibration_normal_center, self.vibration_abnormal_center,
-                                        vibration_value)]
+            "vibration":    predict_abnormal_facter(self.vibration_normal_center, self.vibration_abnormal_center,
+                                        vibration_value)}
 
     @classmethod
     def find_by_container_id(cls, container_id):

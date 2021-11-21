@@ -5,4 +5,4 @@ makemigrations:
 run:
 	python manage.py runserver
 createadmin:
-    python manage.py createsuperuser
+	python manage.py createsuperuser

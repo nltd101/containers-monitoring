@@ -3,4 +3,4 @@ djangorestframework==3.12.4
 python-dotenv
 psycopg2-binary
 psycopg2-binary
-
+paho-mqtt
