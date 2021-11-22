@@ -25,7 +25,7 @@ const Table = (props) => {
               setShowNew={props.setShowNew}
             />
           ) : (
-            <HistoryRow container={e} key={e.id} />
+            <HistoryRow order={e} key={e.id} />
           )
         )}
       </table>

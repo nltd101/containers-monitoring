@@ -14,6 +14,7 @@ import { ResponsiveLine } from "@nivo/line";
 import SensorArea from "./sensor";
 import FactorArea from "./factor";
 import "./container-detail-page.css";
+import Abnormal from "./abnormal"
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -22,7 +23,7 @@ import "./container-detail-page.css";
 const MyResponsiveLine = ({ data /* see data tab */ }) => (
   <ResponsiveLine
     data={data}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    margin={{ top: 50, right: 110, bottom: 100, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",
@@ -35,15 +36,13 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
     axisTop={null}
     axisRight={null}
     axisBottom={{
-      format: function (value) {
-        return value % 100 == 0 ? value : null; // Date.parse(value).getHour();
-      },
+
       orient: "bottom",
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: "transportation",
-      legendOffset: 36,
+      tickRotation: 90,
+
+      legendOffset: 60,
       legendPosition: "middle",
     }}
     axisLeft={{
@@ -51,7 +50,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
+
       legendOffset: -40,
       legendPosition: "middle",
     }}
@@ -113,17 +112,21 @@ const ContainerDetail = (props) => {
   }, []);
   console.log(props.match.params.id);
 
-  function getDataFormat(factor) {
+  function getDataGraphFormat(factor) {
     let step = Math.floor(data.length / 20);
     let meanArray = [];
     for (let i = 0; i < data.length; i += step) {
       let sum = 0;
+      let count=0;
       for (let j = 0; j < step; j++) {
         if (j + i < data.length && data[i + j].data[factor])
+        {
           sum += data[i + j].data[factor].mean;
+          count++;
+        }
       }
-      console.log(sum, step);
-      meanArray.push({ x: i, y: sum / step, low: 75.4, high: 78.4 });
+
+      meanArray.push({ x: data[i].data_time, y: sum / count, low: 75.4, high: 78.4 });
     }
     let result = [
       {
@@ -132,14 +135,27 @@ const ContainerDetail = (props) => {
         color: "hsl(351, 70%, 50%)",
       },
     ];
-
+    console.log(meanArray);
     return result;
+  }
+
+    function getDataIsAbnormalFormat(factor) {
+
+      let abnormalArray = [];
+      for (let i = 0; i < data.length; i ++) {
+        if (data[i].is_abnormal && data[i].is_abnormal[factor])
+        abnormalArray.push({ data_time: data[i].data_time, data:data[i].data[factor]});
+      }
+
+
+    return abnormalArray;
   }
   let scene = [1, 2, 3, 4];
 
   const factors = [
-    { id: "temperature", label: "Nhiệt độ" },
+
     { id: "co2", label: "CO2" },
+    { id: "temperature", label: "Nhiệt độ" },
     { id: "humidity", label: "Độ ẩm" },
     { id: "vibration", label: "Rung lắc" },
   ];
@@ -151,6 +167,7 @@ const ContainerDetail = (props) => {
   ];
   const [indexArea, setIndexArea] = useState(1);
   const [factor, setFactor] = useState("co2");
+  const [tab,setTab]=useState("graph")
   return (
     <div className="content">
       <Header />
@@ -189,20 +206,38 @@ const ContainerDetail = (props) => {
             </div>
           ))}
       </div>
-      <div className="graph-container">
-        <div className="graph">
-          <MyResponsiveLine data={getDataFormat(factor)} />
-        </div>
-        <div className="graph-statistic">
-          {data.length != 0 &&
-            statistic.map((e) => (
-              <StatisticTag
-                label={e.label}
-                value={data[data.length - 1].data[factor][e.id]}
-              />
-            ))}
-        </div>
+      <div>
+      <div className="tab-graph-fluctuation">
+          <div onClick={()=>setTab("graph")} className={tab=="graph"?"chosen-tab":""}
+          >
+          <h4>Graph</h4>
+          </div>
+          <div onClick={()=>setTab("fluctuation")} className={tab=="fluctuation"?"chosen-tab":""}>
+            <h4>The fluctuate periods</h4>
+          </div>
       </div>
+      {
+        tab=="graph"?  <div className="graph-container">
+            <div className="graph">
+              <MyResponsiveLine data={getDataGraphFormat(factor)} />
+            </div>
+            <div className="graph-statistic">
+              {data.length != 0 &&
+                statistic.map((e) => (
+                  <StatisticTag
+                    label={e.label}
+                    value={data[data.length - 1].data[factor][e.id]}
+                  />
+                ))}
+            </div>
+          </div>:
+          <div>
+          <h4>The fluctuate periods</h4>
+          <Abnormal factor={factor} data={getDataIsAbnormalFormat(factor)} />
+          </div>
+      }
+</div>
+
     </div>
   );
 };

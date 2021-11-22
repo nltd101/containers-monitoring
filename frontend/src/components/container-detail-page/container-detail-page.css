@@ -6,12 +6,12 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 300;
-    height: 500px;
+    height: 650px;
     padding: 10px;
 }
 .graph{
-   
-    height: 500;
+
+    height: 600px;
     flex:1 !important}
 .graph-statistic{
     display: flex;
@@ -21,8 +21,27 @@
 .statistic-tag{
     padding-top: 30px;
     background-color: rgb(255, 255, 255);
-  
+
     border-bottom: 1px solid rgb(114, 114, 114);
     text-align: center;
     flex: 1;
+}
+.tab-graph-fluctuation{
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(255,255,255)
+}
+.tab-graph-fluctuation div{
+  cursor: pointer;
+  flex:1;
+  text-align: center;
+  padding: 5px;
+    color: black
+}
+.tab-graph-fluctuation div h4{
+  cursor: pointer;
+}
+.chosen-tab{
+    background-color: rgb(68, 37, 155) !important;
+    color: white !important;
 }
