@@ -69,10 +69,12 @@ class Monitor:
     def listen_factor(self):
         self.__subscribe()
         self.client.loop_start()
-    def send_order_id_to_node_red(self,order_id,container_id):
+    def send_order_id_to_node_red(self,order_id,container_id,expect):
         json_data = {
             "container_id": container_id,
             "magd": order_id,
+            "expect":expect,
+
         }
         print(json_data)
         msg = json.dumps(json_data)

@@ -40,12 +40,15 @@ class PackageModel(models.Model):
         if not containers:
             raise Exception
         order_id = containers.first().order_id
+        print(order_id)
         data_time = data.get("data_time")
         json_data = data.get("json_data")
         orders = OrderModel.objects.filter(pk=order_id)
+        
         if not orders:
             raise Exception
         data = dict_to_list_factor(json_data)
+        print("order",data_time,data)
         if not data:
             raise Exception
         package = cls.objects.create(

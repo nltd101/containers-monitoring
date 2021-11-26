@@ -19,7 +19,7 @@ class OrderModel(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     category = models.IntegerField(default=0, editable=True)
     container = models.ForeignKey(ContainerModel, on_delete=models.CASCADE)
-
+    expect  = models.JSONField(default={"co2":400,"temp":26,"humidity":88,"vibration":0})
     def __str__(self) -> str:
         return str(self.pk)
 

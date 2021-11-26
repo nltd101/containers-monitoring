@@ -55,8 +55,9 @@ const NewModal = (props) => {
       });
     console.log("click", body);
   };
-  console.log("continerid", props.showNew);
+  console.log("containerid", props.showNew);
   const [formData, setFormData] = useState({
+    expect: { co2: 400, temp: 26, humidity: 88, vibration: 0 },
     name: "",
 
     order_id: "",

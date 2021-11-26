@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/historys" exact component={History} />
           <Route path="/order/:id" exact component={ContainerDetail} />
           <Route path="/support" exact component={Support} />
-          <Route path="/warning" exact component={Warning} />
+          {/* <Route path="/warning" exact component={Warning} /> */}
         </Switch>
       </div>
     </Router>
