@@ -1,6 +1,6 @@
 import React from "react";
 import "./factor.css";
-import { covertValue } from "../../../ultils/covert.value.ultils";
+import { covertValue } from "../../../utils/covert.value.utils";
 const FactorArea = ({ data, factor, label }) => {
   return (
     <div>

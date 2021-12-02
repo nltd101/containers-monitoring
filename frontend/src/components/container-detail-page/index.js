@@ -9,12 +9,14 @@ import Footer from "../common/footer";
 import axios from "axios";
 import { DotsItem, useTheme } from "@nivo/core";
 import { FRONT_PAGE_PATH } from "../../constants/paths";
+import { download } from "../../utils/download.utils";
 import Button from "react-bootstrap/Button";
 import { ResponsiveLine } from "@nivo/line";
 import SensorArea from "./sensor";
 import FactorArea from "./factor";
 import "./container-detail-page.css";
-import Abnormal from "./abnormal"
+import Abnormal from "./abnormal";
+import { covertDatetime } from "../../utils/time.utils";
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -23,7 +25,7 @@ import Abnormal from "./abnormal"
 const MyResponsiveLine = ({ data /* see data tab */ }) => (
   <ResponsiveLine
     data={data}
-    margin={{ top: 50, right: 110, bottom: 100, left: 60 }}
+    margin={{ top: 50, right: 110, bottom: 120, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{
       type: "linear",
@@ -36,7 +38,6 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
     axisTop={null}
     axisRight={null}
     axisBottom={{
-
       orient: "bottom",
       tickSize: 5,
       tickPadding: 5,
@@ -117,16 +118,20 @@ const ContainerDetail = (props) => {
     let meanArray = [];
     for (let i = 0; i < data.length; i += step) {
       let sum = 0;
-      let count=0;
+      let count = 0;
       for (let j = 0; j < step; j++) {
-        if (j + i < data.length && data[i + j].data[factor])
-        {
+        if (j + i < data.length && data[i + j].data[factor]) {
           sum += data[i + j].data[factor].mean;
           count++;
         }
       }
 
-      meanArray.push({ x: data[i].data_time, y: sum / count, low: 75.4, high: 78.4 });
+      meanArray.push({
+        x: covertDatetime(data[i].data_time),
+        y: sum / count,
+        low: 75.4,
+        high: 78.4,
+      });
     }
     let result = [
       {
@@ -139,21 +144,21 @@ const ContainerDetail = (props) => {
     return result;
   }
 
-    function getDataIsAbnormalFormat(factor) {
-
-      let abnormalArray = [];
-      for (let i = 0; i < data.length; i ++) {
-        if (data[i].is_abnormal && data[i].is_abnormal[factor])
-        abnormalArray.push({ data_time: data[i].data_time, data:data[i].data[factor]});
-      }
-
+  function getDataIsAbnormalFormat(factor) {
+    let abnormalArray = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].is_abnormal && data[i].is_abnormal[factor])
+        abnormalArray.push({
+          data_time: data[i].data_time,
+          data: data[i].data[factor],
+        });
+    }
 
     return abnormalArray;
   }
   let scene = [1, 2, 3, 4];
 
   const factors = [
-
     { id: "co2", label: "CO2" },
     { id: "temperature", label: "Nhiệt độ" },
     { id: "humidity", label: "Độ ẩm" },
@@ -163,14 +168,35 @@ const ContainerDetail = (props) => {
     { id: "max", label: "Max" },
     { id: "min", label: "Min" },
     { id: "mean", label: "Mean" },
-    { id: "variance", label: "Variacne" },
+    { id: "variance", label: "Variance" },
   ];
   const [indexArea, setIndexArea] = useState(1);
   const [factor, setFactor] = useState("co2");
-  const [tab,setTab]=useState("graph")
+  const [tab, setTab] = useState("graph");
+  const downloadCSV = (factor) => {
+    let arr = [];
+    let temp = ["time", "min", "max", "mean"];
+
+    arr.push(temp);
+    for (let i = 0; i < data.length; i++) {
+      arr.push([
+        covertDatetime(data[i].data_time),
+        data[i].data[factor].min,
+        data[i].data[factor].max,
+        data[i].data[factor].mean,
+      ]);
+    }
+    // console.log(arr);
+    download(
+      arr,
+      `${props.match.params.id}_${factor}.csv`,
+      "text/csv;encoding:utf-8"
+    );
+  };
   return (
     <div className="content">
       <Header />
+
       <div className="area-container">
         {data.length != 0
           ? scene.map((e) =>
@@ -207,17 +233,25 @@ const ContainerDetail = (props) => {
           ))}
       </div>
       <div>
-      <div className="tab-graph-fluctuation">
-          <div onClick={()=>setTab("graph")} className={tab=="graph"?"chosen-tab":""}
+        <div>
+          <Button onClick={() => downloadCSV(factor)}>Download</Button>
+        </div>
+        <div className="tab-graph-fluctuation">
+          <div
+            onClick={() => setTab("graph")}
+            className={tab == "graph" ? "chosen-tab" : ""}
           >
-          <h4>Graph</h4>
+            <h4>Graph</h4>
           </div>
-          <div onClick={()=>setTab("fluctuation")} className={tab=="fluctuation"?"chosen-tab":""}>
+          <div
+            onClick={() => setTab("fluctuation")}
+            className={tab == "fluctuation" ? "chosen-tab" : ""}
+          >
             <h4>The fluctuate periods</h4>
           </div>
-      </div>
-      {
-        tab=="graph"?  <div className="graph-container">
+        </div>
+        {tab == "graph" ? (
+          <div className="graph-container">
             <div className="graph">
               <MyResponsiveLine data={getDataGraphFormat(factor)} />
             </div>
@@ -230,14 +264,14 @@ const ContainerDetail = (props) => {
                   />
                 ))}
             </div>
-          </div>:
-          <div>
-          <h4>The fluctuate periods</h4>
-          <Abnormal factor={factor} data={getDataIsAbnormalFormat(factor)} />
           </div>
-      }
-</div>
-
+        ) : (
+          <div>
+            <h4>The fluctuate periods</h4>
+            <Abnormal factor={factor} data={getDataIsAbnormalFormat(factor)} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

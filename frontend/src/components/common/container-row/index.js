@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { covertDatetime } from "../../../utils/time.utils";
 const ContainerRow = (props) => {
   let container = props.container;
   console.log(props);
@@ -14,8 +15,8 @@ const ContainerRow = (props) => {
     <tr>
       <td>{container.id}</td>
       <td>{container.name}</td>
-      <td>{container.start_time}</td>
-      <td>{container.last_update}</td>
+      <td>{covertDatetime(container.start_time)}</td>
+      <td>{covertDatetime(container.last_update)}</td>
       <td>
         {container.free ? (
           <Button

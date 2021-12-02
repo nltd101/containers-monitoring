@@ -1,6 +1,6 @@
 import React from "react";
 import "./sensor.css";
-import { covertValue } from "../../../ultils/covert.value.ultils";
+import { covertValue } from "../../../utils/covert.value.utils";
 const FactorTag = ({ humidity, temperature, co2, vibration }) => {
   return (
     <div className="sensor-container">

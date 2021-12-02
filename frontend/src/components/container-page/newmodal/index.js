@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { getCookie } from "../../../ultils/token.ultils";
+import { getCookie } from "../../../utils/token.utils";
 import "./newmodal.css";
 import axios from "axios";
+import { covertDatetime } from "../../../utils/time.utils";
 var csrftoken = getCookie("csrftoken");
 const NewModal = (props) => {
   let showNew = props.showNew,
