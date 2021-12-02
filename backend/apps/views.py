@@ -40,7 +40,10 @@ class ContainerView(APIView):
     """
 
     def patch(self, request: Request):
+        
         data = request.data
+        
+
         #   "name"
         #   "route"
         #   "desciption"
@@ -50,7 +53,7 @@ class ContainerView(APIView):
         data = OrderModel.create(data)
         if not data:
             raise ValidationError(detail="create package fail")
-        monitor.send_order_id_to_node_red(data.get("id"),data.get("container"))
+        monitor.send_order_id_to_node_red(data.get("id"),data.get("container"),data.get('expect'))
         return Response({'data': data})
 
 
