@@ -1,0 +1,61 @@
+# version: '2'
+
+# services:
+#   db:
+#     image: docker.io/bitnami/postgresql:11
+#     ports:
+#       - '5432:5432'
+#     volumes:
+#       - 'postgresql_data:/bitnami/postgresql'
+#     environment:
+#       - 'ALLOW_EMPTY_PASSWORD=yes'
+#   web:
+#     build: .
+#     command: python manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - .:/code
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       - POSTGRES_NAME=postgres
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#     depends_on:
+#       - db
+# volumes:
+#   postgresql_data:
+#     driver: local
+version: "3.9"
+   
+services:
+  db:
+    image: docker.io/bitnami/postgresql:11
+    ports:
+      - '5432:5432'
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+  frontend:
+    command : npm start
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+  web:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+      - frontend
+
