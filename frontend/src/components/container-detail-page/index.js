@@ -156,7 +156,7 @@ const ContainerDetail = (props) => {
 
     return abnormalArray;
   }
-  let scene = [1, 2, 3, 4];
+  let scene = [1, 2];
 
   const factors = [
     { id: "co2", label: "CO2" },
