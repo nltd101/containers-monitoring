@@ -1,5 +1,6 @@
 # Container Monitor
-
+## Introduction
+A container monitoring is a system analyzing many factors that affect the quality of products on containers. The system applies machine learning to predict a decline in the quality of the product in the period of transportation and the time for maintenance of the equipment of the refrigerated containers.
 ## Installation
 
 Backend requires [python3.8](https://www.python.org/) to run server.
@@ -29,7 +30,7 @@ yarn
 yarn start
 ```
 
-## The flow
+## The git flow
 
 The flow to develop a new feature is initing a new branch then creating a pull request on github.
 
